@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class SleepCalculator {
-    private ArrayList<String> bedtimes; //Strings are in the form of XX:XX, 24-hour time
-    private ArrayList<String> waketimes; //Strings are in the form of XX:XX, 24-hour time
+    private final ArrayList<String> bedtimes; //Strings are in the form of XX:XX, 24-hour time
+    private final ArrayList<String> waketimes; //Strings are in the form of XX:XX, 24-hour time
     private int cycleLength; //only an estimation
 
     public SleepCalculator() {

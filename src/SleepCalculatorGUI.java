@@ -4,14 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SleepCalculatorGUI {
-    private SleepCalculator sleepCalculator;
-    private JTextField wakeTimeField;
-    private JTextField sleepHoursField;
-    private JTextField bedtimeField;
-    private JTextField newWaketimeField;
-    private JTextArea outputArea;
-    private JButton addTimesButton;
-    private JPanel panelNewTimes;
+    private final SleepCalculator sleepCalculator;
+    private final JTextField wakeTimeField;
+    private final JTextField sleepHoursField;
+    private final JTextField bedtimeField;
+    private final JTextField newWaketimeField;
+    private final JTextArea outputArea;
+    private final JPanel panelNewTimes;
 
     public SleepCalculatorGUI() {
         sleepCalculator = new SleepCalculator();
@@ -66,7 +65,7 @@ public class SleepCalculatorGUI {
 
         // Time buttons
         JButton calculateButton = new JButton("Calculate Best Bedtimes");
-        addTimesButton = new JButton("Add Bedtime and Wake Time");
+        JButton addTimesButton = new JButton("Add Bedtime and Wake Time");
         JButton clearButton = new JButton("Clear Current Bedtimes and Wake Times");
 
         // Add components to panels
