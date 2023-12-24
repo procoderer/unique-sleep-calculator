@@ -150,7 +150,7 @@ public class SleepCalculatorGUI {
                     sleepCalculator.getCycleLength() + " minutes.").append("\n");
         }
         for (String bt : bedtimes) {
-            sb.append(bt).append("\n");
+            sb.append("Bedtime: " + bt).append("\n");
         }
         outputArea.setText(sb.toString());
     }
@@ -159,6 +159,6 @@ public class SleepCalculatorGUI {
         String bedtime = bedtimeField.getText();
         String waketime = newWaketimeField.getText();
         sleepCalculator.addTimes(bedtime, waketime);
-        outputArea.append("Added bedtime: " + bedtime + ", waketime: " + waketime + "\n");
+        outputArea.append("Added bedtime: " + bedtime + ", wake time: " + waketime + "\n");
     }
 }
