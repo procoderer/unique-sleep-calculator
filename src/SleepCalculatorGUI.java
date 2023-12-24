@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SleepCalculatorGUI {
     private final SleepCalculator sleepCalculator;
@@ -82,40 +80,19 @@ public class SleepCalculatorGUI {
         frame.add(panelBottom);
 
         // Action listeners
-        calculateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calculateBestTimes();
+        calculateButton.addActionListener(e -> calculateBestTimes());
+        addTimesButton.addActionListener(e -> addBedtimeAndWaketime());
+        clearButton.addActionListener(e -> sleepCalculator.clearTimes());
+        uniqueCycleButton.addActionListener(e -> {
+            if (!panelNewTimes.isVisible()) {
+                panelNewTimes.setVisible(true);
+                outputArea.setText("");
             }
         });
-        addTimesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addBedtimeAndWaketime();
-            }
-        });
-        clearButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sleepCalculator.clearTimes();
-            }
-        });
-        uniqueCycleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!panelNewTimes.isVisible()) {
-                    panelNewTimes.setVisible(true);
-                    outputArea.setText("");
-                }
-            }
-        });
-        defaultCycleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (panelNewTimes.isVisible()) {
-                    panelNewTimes.setVisible(false);
-                    outputArea.setText("");
-                }
+        defaultCycleButton.addActionListener(e -> {
+            if (panelNewTimes.isVisible()) {
+                panelNewTimes.setVisible(false);
+                outputArea.setText("");
             }
         });
 
