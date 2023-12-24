@@ -104,13 +104,19 @@ public class SleepCalculatorGUI {
         uniqueCycleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelNewTimes.setVisible(true);
+                if (!panelNewTimes.isVisible()) {
+                    panelNewTimes.setVisible(true);
+                    outputArea.setText("");
+                }
             }
         });
         defaultCycleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelNewTimes.setVisible(false);
+                if (panelNewTimes.isVisible()) {
+                    panelNewTimes.setVisible(false);
+                    outputArea.setText("");
+                }
             }
         });
 
