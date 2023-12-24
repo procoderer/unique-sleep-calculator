@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
 public class SleepCalculator {
-    private final ArrayList<String> bedtimes; //Strings are in the form of XX:XX, 24-hour time
-    private final ArrayList<String> waketimes; //Strings are in the form of XX:XX, 24-hour time
-    private int cycleLength; //only an estimation
+    private final ArrayList<String> bedtimes; // Strings are in the form of XX:XX, 24-hour time
+    private final ArrayList<String> waketimes; // Strings are in the form of XX:XX, 24-hour time
+    private int cycleLength;
 
     public SleepCalculator() {
-        bedtimes = new ArrayList<String>();
-        waketimes = new ArrayList<String>();
+        bedtimes = new ArrayList<>();
+        waketimes = new ArrayList<>();
         cycleLength = 90;
     }
 
@@ -47,12 +47,12 @@ public class SleepCalculator {
     public void updateCycleLength() {
         double mostAccurate = avgDecimalDifference(90);
         cycleLength = 90;
-        for(int i = 1; i <= 10; i++) {
-            if(avgDecimalDifference(90 + i) < mostAccurate) {
+        for (int i = 1; i <= 10; i++) {
+            if (avgDecimalDifference(90 + i) < mostAccurate) {
                 mostAccurate = avgDecimalDifference(90 + i);
                 cycleLength = 90 + i;
             }
-            if(avgDecimalDifference(90 - i) < mostAccurate) {
+            if (avgDecimalDifference(90 - i) < mostAccurate) {
                 mostAccurate = avgDecimalDifference(90 - i);
                 cycleLength = 90 - i;
             }
@@ -67,15 +67,15 @@ public class SleepCalculator {
      * @return The sleep length in minutes.
      */
     public int sleepLength(String bedtime, String waketime) {
-        int bedtimeHour = (bedtime.charAt(0) - '0')*10 + (bedtime.charAt(1) - '0');
-        int waketimeHour = (waketime.charAt(0) - '0')*10 + (waketime.charAt(1) - '0');
-        //this would mean the 23:59 threshold was crossed during sleep
-        if(bedtimeHour > waketimeHour) {
+        int bedtimeHour = (bedtime.charAt(0) - '0') * 10 + (bedtime.charAt(1) - '0');
+        int waketimeHour = (waketime.charAt(0) - '0') * 10 + (waketime.charAt(1) - '0');
+        // this would mean the 23:59 threshold was crossed during sleep
+        if (bedtimeHour > waketimeHour) {
             waketimeHour += 24;
         }
 
-        int bedtimeMinutes = bedtimeHour*60 + (bedtime.charAt(3) - '0')*10 + (bedtime.charAt(4) - '0');
-        int waketimeMinutes = waketimeHour*60 + (waketime.charAt(3) - '0')*10 + (waketime.charAt(4) - '0');
+        int bedtimeMinutes = bedtimeHour * 60 + (bedtime.charAt(3) - '0')*10 + (bedtime.charAt(4) - '0');
+        int waketimeMinutes = waketimeHour * 60 + (waketime.charAt(3) - '0')*10 + (waketime.charAt(4) - '0');
 
         return waketimeMinutes - bedtimeMinutes;
     }
@@ -91,11 +91,11 @@ public class SleepCalculator {
     public double avgDecimalDifference(int cycle) {
         double decimalSum = 0;
 
-        for(int i = 0; i < bedtimes.size(); i++) {
-            double quotient = (double)sleepLength(bedtimes.get(i), waketimes.get(i)) / cycle;
-            double decimal = quotient - (int)(quotient);
-            //we want decimal difference, not decimal remainder
-            if(decimal > 0.5) {
+        for (int i = 0; i < bedtimes.size(); i++) {
+            double quotient = (double) sleepLength(bedtimes.get(i), waketimes.get(i)) / cycle;
+            double decimal = quotient - (int) (quotient);
+            // we want decimal difference, not decimal remainder
+            if (decimal > 0.5) {
                 decimal = 1 - decimal;
             }
 
@@ -116,19 +116,17 @@ public class SleepCalculator {
      * @return An array of Strings representing the best bedtimes.
      */
     public static String[] bestTimes(String time, int cycle, int hours) {
-        if(hours*60 % cycle == 0) {
+        if (hours * 60 % cycle == 0) {
             String[] output = new String[3];
-            int numCycles = hours*60 / cycle;
-            output[0] = getTimeBefore(time, cycle * (numCycles+1));
+            int numCycles = hours * 60 / cycle;
+            output[0] = getTimeBefore(time, cycle * (numCycles + 1));
             output[1] = getTimeBefore(time, cycle * numCycles);
-            output[2] = getTimeBefore(time, cycle * (numCycles-1));
+            output[2] = getTimeBefore(time, cycle * (numCycles - 1));
             return output;
-        }
-        else
-        {
+        } else {
             String[] output = new String[2];
-            int numCycles = hours*60 / cycle;
-            output[0] = getTimeBefore(time, cycle * (numCycles+1));
+            int numCycles = hours * 60 / cycle;
+            output[0] = getTimeBefore(time, cycle * (numCycles + 1));
             output[1] = getTimeBefore(time, cycle * numCycles);
             return output;
         }
@@ -144,25 +142,24 @@ public class SleepCalculator {
      */
     public static String getTimeBefore(String time, int minutes) {
         //convert time to number of minutes
-        int timeHour = (time.charAt(0) - '0')*10 + (time.charAt(1) - '0');
-        int timeMinutes = timeHour*60 + (time.charAt(3) - '0')*10 + (time.charAt(4) - '0');
+        int timeHour = (time.charAt(0) - '0') * 10 + (time.charAt(1) - '0');
+        int timeMinutes = timeHour * 60 + (time.charAt(3) - '0') * 10 + (time.charAt(4) - '0');
         //subtract param minutes from the result
         int outputMinutes = timeMinutes - minutes;
         //if outputMinutes crosses the 24-hour barrier, convert it
-        if(outputMinutes < 0) {
-            outputMinutes = 24*60 + outputMinutes;
+        if (outputMinutes < 0) {
+            outputMinutes = 24 * 60 + outputMinutes;
         }
         //convert outputMinutes to output String
         int outputHour = outputMinutes / 60;
         int outputMin = outputMinutes % 60;
         String output = outputHour + ":" + outputMin;
-        if(outputMin < 10) {
+        if (outputMin < 10) {
             output = outputHour + ":0" + outputMin;
         }
-        if(outputHour < 10) {
+        if (outputHour < 10) {
             output = "0" + output;
         }
-
         return output;
     }
 }
