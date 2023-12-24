@@ -16,7 +16,7 @@ public class SleepCalculatorGUI {
         // Create the frame
         JFrame frame = new JFrame("Sleep Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(1000, 800);
         frame.setLayout(new GridLayout(0, 1));
 
         // Create panels
@@ -101,7 +101,6 @@ public class SleepCalculatorGUI {
 
         // Display the frame
         frame.setVisible(true);
-        frame.setSize(1000, 800);
     }
 
     private void calculateBestTimes() {
