@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 public class SleepCalculatorGUI {
     private final SleepCalculator sleepCalculator;
@@ -16,8 +15,8 @@ public class SleepCalculatorGUI {
         // Create the frame
         JFrame frame = new JFrame("Sleep Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 800);
-        frame.setLayout(new GridLayout(0, 1));
+        frame.setSize(900, 750);
+        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
         // Create panels
         JPanel panelChoice = new JPanel();
